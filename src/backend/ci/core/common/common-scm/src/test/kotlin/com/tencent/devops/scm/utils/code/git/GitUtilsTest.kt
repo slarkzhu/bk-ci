@@ -120,5 +120,7 @@ class GitUtilsTest {
         assertEquals(repoName, projectName)
         projectName = GitUtils.getProjectName("http://github.com/Tencent/bk-ci.git")
         assertEquals(repoName, projectName)
+        projectName = GitUtils.getProjectName("http://github.com/Tencent/bk-ci")
+        assertEquals(repoName, projectName)
     }
 }
