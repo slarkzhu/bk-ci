@@ -39,7 +39,7 @@
         <link href="<%= htmlWebpackPlugin.files.css[key] %>" rel="stylesheet" />
     <% } %>
     <!-- end devops:css -->
-    <title>蓝盾DevOps平台</title>
+    <title>BK CI</title>
 </head>
 <body>
     <script>
@@ -77,11 +77,12 @@
         var API_URL_PREFIX = '/ms'     // api接口前缀
         var PERM_URL_PREFIX = '__BK_PAAS_PUBLIC_URL__/o/bk_iam_app' // EE PERM URL PREFIX
         var DOCS_URL_PREFIX = '__BK_CI_DOCS_URL__'  // 文档中心域名
-        var LOGIN_SERVICE_URL = '__BK_CI_PAAS_LOGIN_URL__' // 蓝鲸PaaS登录入口
+        var LOGIN_SERVICE_URL = '<%- htmlWebpackPlugin.options.LOGIN_SERVICE_URL%>' // 蓝鲸PaaS登录入口
         var DEVOPS_LS_VERSION = '<%- htmlWebpackPlugin.options.DEVOPS_LS_VERSION%>'
         var X_DEVOPS_PROJECT_ID = 'X-DEVOPS-PROJECT-ID'
         var BK_CI_VERSION = '__BK_CI_VERSION__'
         var ENTERPRISE_VERSION = false
+        var X_DEVOPS_TOKEN = 'access-token'
     </script>
     
     
@@ -145,7 +146,7 @@
                 console.error('get cookie error', e.message)
                 return ''
             }
-        }
+        } 
 
         function setCookie(cname, cvalue, domain){
             document.cookie = cname + "=" + cvalue + "; " + 'domain=' + domain + '; path=/';
@@ -206,10 +207,11 @@
                 if (/=$/.test(loginUrl.search)) {
                   return LOGIN_SERVICE_URL + cUrl
                 } else {
-                  loginUrl.searchParams.append('c_url', cUrl)
-                  return loginUrl.href
+                    loginUrl.searchParams.append('c_url', cUrl)
+                    return loginUrl.href
                 }
             }
+           
             return LOGIN_SERVICE_URL
         }
 
@@ -220,9 +222,9 @@
                     if (this.readyState == 4 && this.status == 200) {
                         var res = JSON.parse(xhr.responseText)
                         resolve(res && res.data ? res.data : res )
-                    }  else if (this.status == 401) {
+                    }  else if (this.status == 401 || !getCookie(X_DEVOPS_TOKEN)) {
                         // 无登录，这里处理跳转逻辑
-                        window.location.href = window.getLoginUrl()
+                        window.location.href = window.getLoginUrl()            
                     } else if (this.readyState == 4 && this.status > 400) {
                         reject({
                             status: this.status,
@@ -390,7 +392,6 @@
         }
 
         function fetchData() {
-            console.log(pathPid);
             return Promise.all([
                 fetchAllProjects(),
                 fetchAllServices(),

@@ -45,7 +45,7 @@ const webpackBaseConfig = require('../webpack.base')
 const webpack = require('webpack')
 module.exports = (env = {}, argv) => {
     const isDev = argv.mode === 'development'
-    const urlPrefix = env && env.name ? env.name : ''
+    // const urlPrefix = env && env.name ? env.name : ''
     const envDist = env && env.dist ? env.dist : 'frontend'
     const lsVersion = env && env.lsVersion ? env.lsVersion : 'dev' // 最后一个命令行参数为localStorage版本
     const dist = path.join(__dirname, `../${envDist}/console`)
@@ -90,7 +90,8 @@ module.exports = (env = {}, argv) => {
                 ? 'index.html'
                 : `${dist}/frontend#console#index.html`,
             inject: false,
-            DEVOPS_LS_VERSION: lsVersion
+            DEVOPS_LS_VERSION: lsVersion,
+            LOGIN_SERVICE_URL: 'https://bkci-admin-uat.uat.id.seabank.io/#/Login'
         }),
         new AssetPlugin(),
         new SpriteLoaderPlugin({
