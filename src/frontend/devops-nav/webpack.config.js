@@ -91,7 +91,7 @@ module.exports = (env = {}, argv) => {
                 : `${dist}/frontend#console#index.html`,
             inject: false,
             DEVOPS_LS_VERSION: lsVersion,
-            LOGIN_SERVICE_URL: isDev ? 'https://bkci-admin-uat.uat.id.seabank.io/#/Login' : '__BK_CI_PASS_LOGIN_URL__'
+            LOGIN_SERVICE_URL: isDev ? 'https://bkci-admin-uat.uat.id.seabank.io/#/Login' : '__BK_CI_PAAS_LOGIN_URL__'
             // LOGIN_SERVICE_URL: 'https://bkci-admin-uat.uat.id.seabank.io/#/Login'
         }),
         new AssetPlugin(),
