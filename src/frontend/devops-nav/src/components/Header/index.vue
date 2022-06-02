@@ -5,11 +5,12 @@
                 class="header-logo"
                 to="/console/"
             >
-                <Logo
+                <img src="../../assets/images/SeaBank_horizontal_white.png" alt="" style="height: 35px;margin-left: 40px">
+                <!-- <Logo
                     name="devops-logo"
                     width="100"
                     height="28"
-                />
+                /> -->
             </router-link>
             <template v-if="showProjectList">
                 <bk-select ref="projectDropdown"
