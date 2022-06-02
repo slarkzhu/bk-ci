@@ -99,24 +99,24 @@
                                 isLoading: !this.pipeline
                             }
                         },
-                        {
-                            name: 'notify',
-                            label: this.$t('settings.notify'),
-                            component: 'NotifyTab',
-                            bindData: {
-                                failSubscription: this.pipelineSetting ? this.pipelineSetting.failSubscription : null,
-                                successSubscription: this.pipelineSetting ? this.pipelineSetting.successSubscription : null,
-                                updateSubscription: (container, name, value) => {
-                                    this.setPipelineEditing(true)
-                                    this.updatePipelineSetting({
-                                        container,
-                                        param: {
-                                            [name]: value
-                                        }
-                                    })
-                                }
-                            }
-                        },
+                        // {
+                        //     name: 'notify',
+                        //     label: this.$t('settings.notify'),
+                        //     component: 'NotifyTab',
+                        //     bindData: {
+                        //         failSubscription: this.pipelineSetting ? this.pipelineSetting.failSubscription : null,
+                        //         successSubscription: this.pipelineSetting ? this.pipelineSetting.successSubscription : null,
+                        //         updateSubscription: (container, name, value) => {
+                        //             this.setPipelineEditing(true)
+                        //             this.updatePipelineSetting({
+                        //                 container,
+                        //                 param: {
+                        //                     [name]: value
+                        //                 }
+                        //             })
+                        //         }
+                        //     }
+                        // },
                         {
                             name: 'baseSetting',
                             label: this.$t('editPage.baseSetting'),
