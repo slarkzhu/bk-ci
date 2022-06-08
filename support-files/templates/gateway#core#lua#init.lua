@@ -117,6 +117,9 @@ config = {
   bkrepo = {
     domain = "__BK_REPO_HOST__",
     authorization = "__BK_CI_BKREPO_AUTHORIZATION__"
+  },
+  rabbitmq = {
+    addr = "__BK_CI_RABBITMQ_ADDR__"
   }
 }
   
